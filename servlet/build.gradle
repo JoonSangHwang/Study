@@ -20,12 +20,20 @@ repositories {
 }
 
 dependencies {
+
+	// Web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// JUnit
 	implementation 'junit:junit:4.12'
 
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	//JSP
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	implementation 'javax.servlet:jstl'
 	
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
