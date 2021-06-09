@@ -1,5 +1,6 @@
 package com.junsang.servlet.basic.request;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -25,12 +26,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class RequestTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @Autowired private MockMvc mockMvc;
+    @Autowired private ObjectMapper objectMapper;
 
 
     @Test
-    @DisplayName("aaaaaaaa")
+    @DisplayName("GET 쿼리 파라미터 요청")
     public void a() throws Exception {
 
         // Given
@@ -40,7 +41,6 @@ class RequestTest {
 
         // When
         mockMvc.perform(get("/request-param")
-//                    .contentType()
                     .characterEncoding("UTF-8")
                     .accept(MediaType.ALL)
                     .params(param)
@@ -52,10 +52,8 @@ class RequestTest {
     }
 
     @Test
-    @DisplayName("bbbbbb")
+    @DisplayName("POST Form 요청")
     public void b() throws Exception {
-
-        // http://localhost:8013/request-header?username=js
 
         // Given
         MultiValueMap<String, String> param = new LinkedMultiValueMap<>();
@@ -63,10 +61,10 @@ class RequestTest {
 
         // When
         mockMvc.perform(get("/request-header")
-    //                .contentType(MediaType.ALL)
-    //                .characterEncoding("UTF-8")
-    //                .accept(MediaType.ALL)
-    //                .params(param)
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                    .characterEncoding("UTF-8")
+                    .accept(MediaType.ALL)
+                    .params(param)
         )
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -83,7 +81,7 @@ class RequestTest {
 
         // When
         mockMvc.perform(post("/request-body-string")
-                    .contentType("text/plain")
+                    .contentType(MediaType.TEXT_PLAIN_VALUE)
                     .characterEncoding("UTF-8")
                     .accept(MediaType.ALL)
                     .content(text)
@@ -93,6 +91,31 @@ class RequestTest {
 
         // Then
     }
+
+    @Test
+    @DisplayName("JSON 요청")
+    public void d() throws Exception {
+
+        // Given
+        HelloData sample = HelloData.builder()
+                .username("준상")
+                .age(29)
+                .build();
+
+        // When
+        mockMvc.perform(get("/request-body-json")
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .characterEncoding("UTF-8")
+                    .accept(MediaType.ALL)
+                    .content(objectMapper.writeValueAsString(sample))
+        )
+                .andExpect(status().isOk())
+                .andDo(print());
+
+        // Then
+    }
+
+
 
 
 

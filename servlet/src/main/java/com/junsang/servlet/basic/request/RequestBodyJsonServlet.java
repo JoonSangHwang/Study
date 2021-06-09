@@ -1,6 +1,7 @@
 package com.junsang.servlet.basic.request;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.*;
 import org.springframework.util.StreamUtils;
 
 import javax.servlet.ServletException;
@@ -19,16 +20,23 @@ public class RequestBodyJsonServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        ServletInputStream inputStream = request.getInputStream();
-//        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
-//
-//        System.out.println("messageBody = " + messageBody);
-//
-//        HelloData helloData = objectMapper.readValue(messageBody, HelloData.class);
-//
-//        System.out.println("helloData.username = " + helloData.getUsername());
-//        System.out.println("helloData.age = " + helloData.getAge());
-//
-//        response.getWriter().write("ok");
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("messageBody = " + messageBody);
+
+        HelloData helloData = objectMapper.readValue(messageBody, HelloData.class);
+
+        System.out.println("helloData.username = " + helloData.getUsername());
+        System.out.println("helloData.age = " + helloData.getAge());
+
+        response.getWriter().write("ok");
     }
+}
+
+@Setter @Getter @Builder @NoArgsConstructor @AllArgsConstructor
+class HelloData {
+
+    private String username;
+    private int age;
 }
