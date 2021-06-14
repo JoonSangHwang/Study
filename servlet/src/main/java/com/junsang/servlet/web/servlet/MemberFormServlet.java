@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "memberFormServlet", urlPatterns = "/servlet/members/new-form")
+@WebServlet(
+        description = "서블릿은 서버 시간을 처리하는 클래스입니다",
+        name = "memberFormServlet",
+        urlPatterns = "/servlet/members/new-form")
 public class MemberFormServlet extends HttpServlet {
 
     private MemberRepository memberRepository = MemberRepository.getInstance();

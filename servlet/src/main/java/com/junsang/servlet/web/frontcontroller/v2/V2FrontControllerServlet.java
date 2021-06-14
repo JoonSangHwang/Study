@@ -1,9 +1,9 @@
 package com.junsang.servlet.web.frontcontroller.v2;
 
 import com.junsang.servlet.web.frontcontroller.MyView;
-import com.junsang.servlet.web.frontcontroller.v2.controller.MemberFormControllerV2;
-import com.junsang.servlet.web.frontcontroller.v2.controller.MemberListControllerV2;
-import com.junsang.servlet.web.frontcontroller.v2.controller.MemberSaveControllerV2;
+import com.junsang.servlet.web.frontcontroller.v2.controller.V2MemberFormController;
+import com.junsang.servlet.web.frontcontroller.v2.controller.V2MemberListController;
+import com.junsang.servlet.web.frontcontroller.v2.controller.V2MemberSaveController;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,14 +15,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(name = "frontControllerServletV2", urlPatterns = "/front-controller/v2/*")
-public class FrontControllerServletV2 extends HttpServlet {
+public class V2FrontControllerServlet extends HttpServlet {
 
     private Map<String, V2Controller> controllerMap = new HashMap<>();
 
-    public FrontControllerServletV2() {
-        controllerMap.put("/front-controller/v2/members/new-form", new MemberFormControllerV2());
-        controllerMap.put("/front-controller/v2/members/save", new MemberSaveControllerV2());
-        controllerMap.put("/front-controller/v2/members", new MemberListControllerV2());
+    public V2FrontControllerServlet() {
+        controllerMap.put("/front-controller/v2/members/new-form", new V2MemberFormController());
+        controllerMap.put("/front-controller/v2/members/save", new V2MemberSaveController());
+        controllerMap.put("/front-controller/v2/members", new V2MemberListController());
     }
 
     @Override
