@@ -3,11 +3,11 @@ package com.junsang.servlet.web.frontcontroller.v3.controller;
 import com.junsang.servlet.member.Member;
 import com.junsang.servlet.member.MemberRepository;
 import com.junsang.servlet.web.frontcontroller.ModelView;
-import com.junsang.servlet.web.frontcontroller.v3.ControllerV3;
+import com.junsang.servlet.web.frontcontroller.v3.V3Controller;
 
 import java.util.Map;
 
-public class MemberSaveControllerV3 implements ControllerV3 {
+public class V3MemberSaveController implements V3Controller {
 
     private MemberRepository memberRepository = MemberRepository.getInstance();
 

@@ -8,10 +8,15 @@ import lombok.Setter;
 import java.util.HashMap;
 import java.util.Map;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter @Setter
 public class ModelView {
     private String viewName;
     private Map<String, Object> model = new HashMap<>();
+
+    public ModelView() {
+
+    }
+
+    public ModelView(String s) {
+    }
 }

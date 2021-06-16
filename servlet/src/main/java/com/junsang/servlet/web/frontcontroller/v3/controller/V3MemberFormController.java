@@ -1,11 +1,11 @@
 package com.junsang.servlet.web.frontcontroller.v3.controller;
 
 import com.junsang.servlet.web.frontcontroller.ModelView;
-import com.junsang.servlet.web.frontcontroller.v3.ControllerV3;
+import com.junsang.servlet.web.frontcontroller.v3.V3Controller;
 
 import java.util.Map;
 
-public class MemberFormControllerV3 implements ControllerV3 {
+public class V3MemberFormController implements V3Controller {
 
     @Override
     public ModelView process(Map<String, String> paramMap) {

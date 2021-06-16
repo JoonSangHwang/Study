@@ -21,8 +21,13 @@ public class MyView {
     }
 
     public void render(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 모델에 있는 데이터를 가져와 request 에 담는다.
         modelToRequestAttribute(model, request);
+
+        // JSP 에게 포워드 함으로서, JSP 에서 데이터 사용 가능
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
+
+        // JSP 포워드
         dispatcher.forward(request, response);
     }
 
