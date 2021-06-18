@@ -1,8 +1,11 @@
-package com.junsang.servlet.web.frontcontroller.v3.controller;
+package com.junsang.servlet.web.frontcontroller.v3;
 
 import com.junsang.servlet.web.frontcontroller.ModelView;
 import com.junsang.servlet.web.frontcontroller.MyView;
 import com.junsang.servlet.web.frontcontroller.v3.V3Controller;
+import com.junsang.servlet.web.frontcontroller.v3.controller.V3MemberFormController;
+import com.junsang.servlet.web.frontcontroller.v3.controller.V3MemberListController;
+import com.junsang.servlet.web.frontcontroller.v3.controller.V3MemberSaveController;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
