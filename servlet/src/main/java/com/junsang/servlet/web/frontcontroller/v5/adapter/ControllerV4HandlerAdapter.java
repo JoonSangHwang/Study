@@ -25,11 +25,17 @@ public class ControllerV4HandlerAdapter implements MyHandlerAdapter {
         Map<String, String> paramMap = createParamMap(request);
         HashMap<String, Object> model = new HashMap<>();
 
+        // 컨트롤러로부터 viewName 받기
         String viewName = controller.process(paramMap, model);
 
-        ModelView mv = new ModelView(viewName);
-        mv.setModel(model);
+        /**
+         * 이 부분에서 바로 return viewName 하면, 타입이 안맞는다.
+         * -> 어댑터 사용 !
+         */
 
+        // 어댑터
+        ModelView mv = new ModelView(viewName); // 뷰 설정
+        mv.setModel(model);                     // 모델 설정
         return mv;
     }
 

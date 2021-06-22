@@ -22,45 +22,52 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 역할과 구현을 구분하는 MVC 패턴
+ */
 @WebServlet(name = "frontControllerServletV5", urlPatterns = "/front-controller/v5/*")
 public class V5FrontControllerServlet extends HttpServlet {
+
     //매핑정보 목록
     private final Map<String, Object> handlerMappingMap = new HashMap<>();
+
     //어탭터 목록
     private final List<MyHandlerAdapter> handlerAdapters = new ArrayList<>();
 
     public V5FrontControllerServlet() {
+
+        // 핸들러 맵핑
         initHandlerMappingMap();
+
+        // 어댑터 추가
         initHandlerAdapters();
     }
+
     private void initHandlerMappingMap() {
+        // V3 맵핑
         handlerMappingMap.put("/front-controller/v5/v3/members/new-form", new V3MemberFormController());
         handlerMappingMap.put("/front-controller/v5/v3/members/save", new V3MemberSaveController());
         handlerMappingMap.put("/front-controller/v5/v3/members", new V3MemberListController());
 
-        // v4 추가
+        // v4 맵핑
         handlerMappingMap.put("/front-controller/v5/v4/members/new-form", new V4MemberFormController());
         handlerMappingMap.put("/front-controller/v5/v4/members/save", new V4MemberSaveController());
         handlerMappingMap.put("/front-controller/v5/v4/members", new V4MemberListController());
     }
 
-
     private void initHandlerAdapters() {
-
-        handlerAdapters.add(new ControllerV3HandlerAdapter());
-        handlerAdapters.add(new ControllerV4HandlerAdapter());
+        handlerAdapters.add(new ControllerV3HandlerAdapter());  // V3
+        handlerAdapters.add(new ControllerV4HandlerAdapter());  // V4
     }
 
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        //매핑정보에서 핸들러를 조회
+        // 매핑정보에서 핸들러를 조회
         Object handler = getHandler(request);
-
-        //핸들러가 없을 때
         if (handler == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);       // 404
             return;
         }
 
@@ -86,10 +93,10 @@ public class V5FrontControllerServlet extends HttpServlet {
 
     private MyHandlerAdapter getHandlerAdapter(Object handler) {
         for (MyHandlerAdapter adapter : handlerAdapters) {
-            if (adapter.supports(handler)) {
+            if (adapter.supports(handler))
                 return adapter;
-            }
-        } throw new IllegalArgumentException("handler adapter를 찾을 수 없습니다. handler=" + handler);
+        }
+        throw new IllegalArgumentException("handler adapter를 찾을 수 없습니다. handler=" + handler);
     }
 
 
