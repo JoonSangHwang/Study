@@ -32,10 +32,9 @@ public class V3FrontControllerServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String requestURI = request.getRequestURI();
         // 프론트 컨트롤러가 가진 URL 맵핑 정보 가져오기
+        String requestURI = request.getRequestURI();
         V3Controller controller = controllerMap.get(requestURI);
-        // 사용자가 요청한 URL 이 없을 경우 404
         if (controller == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
