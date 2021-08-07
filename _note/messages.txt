@@ -1,0 +1,11 @@
+메시지, 국제화(i18n)
+- 스프링은 기본적인 메시지와 국제화를 지원한다.
+- 메시지는 일관성을 위한 목적이다.
+- 국제화는 나라별 메시지(언어) 지원을 위한 목적이다.
+- 기본적으로 HTTP "accept-language" 헤더 값을 보고 판단
+- 기본적으로 "spring.messages.basename=messages" 위치 경로이다.
+
+LocaleResolver 인터페이스
+- 스프링은 Locale 선택 방식을 변경할 수 있도록 "LocaleResolver" 인터페이스 제공
+- 스프링부트는 Default 로 "accept-language" 을 활용하는 "AcceptHeaderLocaleResolver" 사용
+- 이런 기본 방식을 변경하고 싶다면 LocaleResolver 예제를 찾아보자.
