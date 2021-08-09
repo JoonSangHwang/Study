@@ -1,6 +1,10 @@
 BindingResult
 - 스프링이 제공하는 검증 오류를 보관하는 객체
 - BindingResult 객체는 꼭 @modelAttribute 뒤에 와야 한다.
+  : 따라서 BindingResult 는 이미 본인이 검증해야 할 객체인 target 을 알고 있다.
+  : log.info("objectName={}", bindingResult.getObjectName());
+  : log.info("target={}", bindingResult.getTarget());
+
 - 자동으로 View 에 넘겨주므로 model.addAttribute 해줄 필요 없다.
 - @ModelAttribute 에 데이터 바인딩 시, 오류가 발생해도 컨트롤러가 호출된다.
   : 오류 발생 시, 스프링이 FieldError 를 생성하면서 사용자가 입력한 값을 넣어 반환한다.
@@ -14,6 +18,6 @@ BindingResult
   field – 오류가 발생한 필드 이름
   rejectedValue – 검증 실패 시, 초기화 될 값
   bindingFailure – 바인딩에 실패한 것인가? T/F
-  codes – the codes to be used to resolve this message (메시지 코드)
-  arguments – the array of arguments to be used to resolve this message (메시지에서 사용하는 인자)
+  codes – 오류 메시지
+  arguments – 오류 메시지에서 사용하는 인자
   defaultMessage – 오류 기본 메시지
