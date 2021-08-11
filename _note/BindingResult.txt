@@ -21,3 +21,7 @@ BindingResult
   codes – 오류 메시지
   arguments – 오류 메시지에서 사용하는 인자
   defaultMessage – 오류 기본 메시지
+
+* JsonMessageConvertor 경우 데이터 바인딩 시, 오류가 발생하면 400 에러가 발생한다.
+  : Deserialize 실패로 Controller 호출이 안 됨
+  : @RequestBody 경우는 @ModelAttribute 와 다르게 각각의 필드 단위로 세밀하게 적용되는것이 아닌 객체 단위로 적용된다.

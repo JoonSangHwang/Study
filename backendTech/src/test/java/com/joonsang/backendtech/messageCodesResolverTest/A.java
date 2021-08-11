@@ -19,7 +19,7 @@ public class A {
     MessageCodesResolver mcr = new DefaultMessageCodesResolver();
 
     @Test
-    @DisplayName("기본 messages 확인")
+    @DisplayName("Object Error 메시지 테스트")
     public void a() {
         String[] messageCodes = mcr.resolveMessageCodes("required", "item");
 
@@ -34,7 +34,7 @@ public class A {
     }
 
     @Test
-    @DisplayName("기본 messages 확인")
+    @DisplayName("Field Error 메시지 테스트")
     public void b() {
         String[] messageCodes = mcr.resolveMessageCodes("required", "item", "itemName", String.class);
 

@@ -5,5 +5,17 @@
 - API 방식을 사용하면 API 스펙을 잘 정의해서 검증 오류를 API 응답 결과에 잘 남겨주어야 함
 
 * @Validated 와 @Valid
-  @Validated : 스프링 전용 검증 어노테이션
-  @Valid : 자바 표준(javax) 검증 어노테이션 (gradle 에 의존성 필요함)
+    @Validated : 스프링 전용 검증 어노테이션
+    @Valid : 자바 표준(javax) 검증 어노테이션 (gradle 에 의존성 필요함)
+
+* build.gradle
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+- 스프링 부트는 LocalValidatorFactoryBeand 를 자동으로 글로벌 검증기로 등록
+- 어떤 컨트롤러든 @validated 를 만나면 LocalValidatorFactoryBeand 을 통해 어토네이션 기반 검증을 거쳐 이를 bindingresult에 객체단위로 저장
+- 검증 오류가 발생하면, FieldError/ObjectError 를 생성해서 BindingResult 에 담아준다.
+
+* 하이버네이트 Validator 관련 링크
+    공식 사이트: http://hibernate.org/validator/
+    공식 메뉴얼: https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html_single/
+    검증 애노테이션 모음: https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html_single/#validator-defineconstraints-spec

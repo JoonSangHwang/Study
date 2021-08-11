@@ -1,6 +1,9 @@
 package com.joonsang.backendtech.validation;
 
+import com.joonsang.backendtech.domain.Item;
 import com.joonsang.backendtech.domain.ItemValid;
+import com.joonsang.backendtech.domain.SaveCheck;
+import com.joonsang.backendtech.domain.UpdateCheck;
 import com.joonsang.backendtech.repository.ItemValidRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,70 +20,82 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping("/validation/v7/items")
-public class ValidationItemControllerV7 {
+@RequestMapping("/validation/v8/items")
+public class ValidationItemControllerV8 {
 
     private final ItemValidRepository itemValidRepository;
-    private final ItemValidator itemValidator;
 
     @Autowired
-    ValidationItemControllerV7(ItemValidRepository itemValidRepository, ItemValidator itemValidator) {
+    ValidationItemControllerV8(ItemValidRepository itemValidRepository, ItemValidator itemValidator) {
         this.itemValidRepository = itemValidRepository;
-        this.itemValidator = itemValidator;
-    }
-
-    @InitBinder
-    public void init(WebDataBinder dataBinder) {
-        dataBinder.addValidators(itemValidator);        // 검증기 등록 supports(Item.class)
     }
 
     @GetMapping
     public String items(Model model) {
         List<ItemValid> items = itemValidRepository.findAll();
         model.addAttribute("items", items);
-        return "validation/v7/items";
+        return "validation/v8/items";
     }
 
     @GetMapping("/{itemId}")
     public String item(@PathVariable long itemId, Model model) {
         ItemValid item = itemValidRepository.findById(itemId);
         model.addAttribute("item", item);
-        return "validation/v7/item";
+        return "validation/v8/item";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("item", new ItemValid());
-        return "validation/v7/addForm";
+        return "validation/v8/addForm";
     }
 
     @PostMapping("/add")
-    public String addItem(@Validated @ModelAttribute ItemValid item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String addItem(@Validated(value = SaveCheck.class) @ModelAttribute ItemValid item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+
+        if (item.getPrice() != null && item.getQuantity() != null) {
+            int resultPrice = item.getPrice() * item.getQuantity();
+            if (resultPrice < 10000)
+                bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
+        }
 
         // 검증 실패하면 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
             log.info("errors = {}", bindingResult);
-            return "validation/v7/addForm";     // addForm.html
+            return "validation/v8/addForm";     // addForm.html
         }
 
         // 비즈니스 로직
         ItemValid savedItem = itemValidRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:/validation/v7/items/{itemId}";
+        return "redirect:/validation/v8/items/{itemId}";
     }
 
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
         ItemValid item = itemValidRepository.findById(itemId);
         model.addAttribute("item", item);
-        return "validation/v7/editForm";
+        return "validation/v8/editForm";
     }
 
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @ModelAttribute ItemValid item) {
+    public String edit(@PathVariable Long itemId, @Validated(value = UpdateCheck.class) @ModelAttribute ItemValid item, BindingResult bindingResult) {
+
+        if (item.getPrice() != null && item.getQuantity() != null) {
+            int resultPrice = item.getPrice() * item.getQuantity();
+            if (resultPrice < 10000)
+                bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
+        }
+
+        // 검증 실패하면 다시 입력 폼으로
+        if (bindingResult.hasErrors()) {
+            log.info("errors = {}", bindingResult);
+            return "validation/v8/addForm";     // addForm.html
+        }
+
         itemValidRepository.update(itemId, item);
-        return "redirect:/validation/v7/items/{itemId}";
+        return "redirect:/validation/v8/items/{itemId}";
     }
 
     private boolean hasError(Map<String, String> errors) {
