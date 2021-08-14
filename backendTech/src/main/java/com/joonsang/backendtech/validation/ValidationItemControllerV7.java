@@ -1,7 +1,7 @@
 package com.joonsang.backendtech.validation;
 
-import com.joonsang.backendtech.domain.ItemValid;
-import com.joonsang.backendtech.repository.ItemValidRepository;
+import com.joonsang.backendtech.domain.item.ItemValid;
+import com.joonsang.backendtech.repository.item.ItemValidRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

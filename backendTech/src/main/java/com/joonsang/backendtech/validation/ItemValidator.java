@@ -1,6 +1,6 @@
 package com.joonsang.backendtech.validation;
 
-import com.joonsang.backendtech.domain.Item;
+import com.joonsang.backendtech.domain.item.Item;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;

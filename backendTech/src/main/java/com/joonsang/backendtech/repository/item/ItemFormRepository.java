@@ -1,6 +1,6 @@
-package com.joonsang.backendtech.repository;
+package com.joonsang.backendtech.repository.item;
 
-import com.joonsang.backendtech.domain.ItemForm;
+import com.joonsang.backendtech.domain.item.ItemForm;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

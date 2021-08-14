@@ -1,11 +1,10 @@
 package com.joonsang.backendtech.validation;
 
-import com.joonsang.backendtech.domain.Item;
-import com.joonsang.backendtech.repository.ItemRepository;
+import com.joonsang.backendtech.domain.item.Item;
+import com.joonsang.backendtech.repository.item.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;

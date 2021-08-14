@@ -1,4 +1,4 @@
-package com.joonsang.backendtech.domain;
+package com.joonsang.backendtech.domain.item;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;

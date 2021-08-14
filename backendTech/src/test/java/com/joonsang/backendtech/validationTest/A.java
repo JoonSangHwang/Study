@@ -1,7 +1,6 @@
 package com.joonsang.backendtech.validationTest;
 
-import com.joonsang.backendtech.domain.ItemValid;
-import org.assertj.core.api.Assertions;
+import com.joonsang.backendtech.domain.item.ItemValid;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;

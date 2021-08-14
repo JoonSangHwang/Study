@@ -1,9 +1,7 @@
 package com.joonsang.backendtech.validation;
 
-import com.joonsang.backendtech.domain.ItemForm;
-import com.joonsang.backendtech.domain.SaveCheck;
-import com.joonsang.backendtech.domain.UpdateCheck;
-import com.joonsang.backendtech.repository.ItemFormRepository;
+import com.joonsang.backendtech.domain.item.ItemForm;
+import com.joonsang.backendtech.repository.item.ItemFormRepository;
 import com.joonsang.backendtech.validation.form.ItemSaveForm;
 import com.joonsang.backendtech.validation.form.ItemUpdateForm;
 import lombok.extern.slf4j.Slf4j;
