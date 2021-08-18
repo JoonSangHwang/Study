@@ -1,4 +1,4 @@
-package com.joonsang.backendtech.controller.member;
+package com.joonsang.backendtech.login;
 
 import com.joonsang.backendtech.domain.member.Member;
 import com.joonsang.backendtech.repository.member.MemberRepository;
