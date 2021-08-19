@@ -1,5 +1,6 @@
 package com.joonsang.backendtech.controller;
 
+import com.joonsang.backendtech.argumentresolver.Login;
 import com.joonsang.backendtech.domain.member.Member;
 import com.joonsang.backendtech.repository.member.MemberRepository;
 import com.joonsang.backendtech.session.SessionConst;
@@ -75,13 +76,26 @@ public class HomeController {
         return "loginHome";
     }
 
-    @GetMapping("/")
+//    @GetMapping("/")
     public String homeLoginV4(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member member, Model model) {
 
         if (member == null)
             return "home";
 
         model.addAttribute("member", member);
+        return "loginHome";
+    }
+
+    @GetMapping("/")
+    public String homeLoginV3ArgumentResolver(@Login Member loginMember, Model model) {
+
+        //세션에 회원 데이터가 없으면 home
+        if (loginMember == null) {
+            return "home";
+        }
+
+        //세션이 유지되면 로그인으로 이동
+        model.addAttribute("member", loginMember);
         return "loginHome";
     }
 }
