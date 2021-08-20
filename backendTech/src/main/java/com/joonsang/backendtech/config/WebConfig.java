@@ -13,6 +13,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
         filterRegistrationBean.setFilter(new LogFilter());
         filterRegistrationBean.setOrder(1);             // 필터 순서
         filterRegistrationBean.addUrlPatterns("/*");    // URL 패턴
+        filterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST, DispatcherType.ERROR);    // 2 가지만 허용
         return filterRegistrationBean;
     }
 
@@ -46,6 +48,7 @@ public class WebConfig implements WebMvcConfigurer {
         filterRegistrationBean.setFilter(new LoginCheckFilter());
         filterRegistrationBean.setOrder(2);
         filterRegistrationBean.addUrlPatterns("/*");
+        filterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST, DispatcherType.ERROR);    // 2 가지만 허용
 
         return filterRegistrationBean;
     }
@@ -61,13 +64,13 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LogInterceptor())
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/css/**", "/*.ico", "/error");
+                .excludePathPatterns("/css/**", "/*.ico", "/error", "error-page/**");
 
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(2)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/", "/members/add", "/login", "/logout",
-                        "/css/**", "/*.ico", "/error");
+                        "/css/**", "/*.ico", "/error", "/exception/*", "error-page/**");
     }
 
     /**
