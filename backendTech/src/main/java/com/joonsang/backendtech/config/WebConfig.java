@@ -1,5 +1,6 @@
 package com.joonsang.backendtech.config;
 
+import com.joonsang.backendtech.api.MyHandlerExceptionResolver;
 import com.joonsang.backendtech.argumentresolver.LoginMemberArgumentResolver;
 import com.joonsang.backendtech.filter.LogFilter;
 import com.joonsang.backendtech.filter.LoginCheckFilter;
@@ -10,6 +11,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -79,5 +81,14 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(new LoginMemberArgumentResolver());
+    }
+
+    /**
+     * Exception Handler 등록
+     */
+    @Override
+    public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
+        resolvers.add(new MyHandlerExceptionResolver());
+//        resolvers.add(new UserHandlerExceptionResolver());
     }
 }
