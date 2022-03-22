@@ -1,4 +1,4 @@
-package design_pattern_of_gof.singleton;
+package design_pattern_of_gof.d1_singleton;
 
 public class Singleton1 {
 
